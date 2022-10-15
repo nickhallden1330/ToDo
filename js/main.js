@@ -7,6 +7,7 @@ const elUncomplated = document.querySelector('.js-uncomplated');
 const elBtns = document.querySelector('.js-btns');
 const elButtn = document.querySelector('.js-buttn');
 const localData = JSON.parse(window.localStorage.getItem('List'));
+const itemFragment = document.createDocumentFragment();
 var theme = false;
 
 const todos = localData || [];
@@ -36,13 +37,14 @@ const renderTodos = (array, node) => {
 		newButton.dataset.todoId = item.id;
 		newInp.dataset.todoId = item.id;
 
-		node.appendChild(newItem);
+		itemFragment.appendChild(newItem);
 
 		if (item.isComplated) {
 			newSpan.setAttribute('class', 'text-decoration-line-through');
 			newInp.checked = true;
 		}
 	});
+	node.appendChild(itemFragment)
 };
 
 renderTodos(todos, elList);
